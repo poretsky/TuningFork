@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Tuning fork</string>
+  <string name="classic_guitar">Classic guitar</string>
+  <string name="russian_guitar">Russian guitar</string>
+  <string name="chromatic_scale">Chromatic scale</string>
+  <string name="action_stop">Mute</string>
+  <string name="C">Do</string>
+  <string name="C_sharp">Do sharp</string>
+  <string name="D">Re</string>
+  <string name="D_sharp">Re sharp</string>
+  <string name="E">Mi</string>
+  <string name="F">Fa</string>
+  <string name="F_sharp">Fa sharp</string>
+  <string name="G">Sol</string>
+  <string name="G_sharp">Sol sharp</string>
+  <string name="A">La</string>
+  <string name="B">Si flat</string>
+  <string name="H">Si</string>
+  <string name="first">First string</string>
+  <string name="second">Second string</string>
+  <string name="third">Third string</string>
+  <string name="fourth">Fourth string</string>
+  <string name="fifth">Fifth string</string>
+  <string name="sixth">Sixth string</string>
+  <string name="seventh">Seventh string</string>
+  <string name="sounding">Sounding</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string-array name="mode_names">
+    <item>@string/chromatic_scale</item>
+    <item>@string/classic_guitar</item>
+    <item>@string/russian_guitar</item>
+  </string-array>
+</resources>
