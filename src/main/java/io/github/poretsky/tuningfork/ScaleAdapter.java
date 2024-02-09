@@ -57,7 +57,7 @@ class ScaleAdapter extends ArrayAdapter<String> implements AdapterView.OnItemCli
     @Override
     public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
         if (host.tone.isPlaying() && (position == currentItem)) {
-            host.tone.stop();
+            host.tone.mute();
         } else {
             host.tone.start(notes[position]);
             currentItem = position;

@@ -16,11 +16,11 @@ class ToneGenerator {
     private static final double DOUBLE_PI = 2.0 * Math.PI;
 
     private final AudioTrack player;
-    private float[] waveBuffer;
+    private final float[] waveBuffer;
 
     private Thread generator;
 
-    private volatile boolean playing;
+    private volatile int playing;
     private volatile double fi;
     private volatile double delta;
 
@@ -39,25 +39,37 @@ class ToneGenerator {
             .setTransferMode(AudioTrack.MODE_STREAM)
             .build();
         waveBuffer = new float[player.getBufferSizeInFrames()];
-        playing = false;
+        playing = 0;
         fi = 0.0;
         delta = 0.0;
+        generator = new Thread(this::generate);
+        generator.start();
+        player.play();
     }
 
     void start(double freq) {
         delta = DOUBLE_PI * freq / player.getSampleRate();
-        if (!playing) {
+        if (playing < 0) {
             fi = 0.0;
-            playing = true;
+            playing = 0;
             generator = new Thread(this::generate);
             generator.start();
             player.play();
         }
+        playing = 1;
+        player.setVolume(1);
+    }
+
+    void mute() {
+        player.setVolume(0);
+        playing = 0;
+        delta = 0.0;
+        fi = 0.0;
     }
 
     void stop() {
-        if (playing) {
-            playing = false;
+        if (playing >= 0) {
+            playing = -1;
             player.pause();
             player.flush();
             try {
@@ -68,11 +80,11 @@ class ToneGenerator {
     }
 
     boolean isPlaying() {
-        return playing;
+        return playing > 0;
     }
 
     private void generate() {
-        while (playing) {
+        while (playing >= 0) {
             for (int i = 0; i < waveBuffer.length; i++) {
                 waveBuffer[i] = (float) Math.sin(fi);
                 fi += delta;

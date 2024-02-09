@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onStop() {
         super.onStop();
-        tone.stop();
+        tone.mute();
     }
 
     @Override
@@ -70,10 +70,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public boolean onOptionsItemSelected(MenuItem item) {
         final int itemId = item.getItemId();
         if (itemId == R.id.action_stop) {
-            tone.stop();
+            tone.mute();
             invalidateOptionsMenu();
             ((ScaleAdapter) getListFragment().getListAdapter()).notifyDataSetChanged();
         } else if (itemId == android.R.id.home) {
+            tone.mute();
             finish();
         } else {
             return super.onOptionsItemSelected(item);
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         if (mode != pos) {
-            tone.stop();
+            tone.mute();
             mode = pos;
             redisplay(pos);
             invalidateOptionsMenu();
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        tone.stop();
+        tone.mute();
         invalidateOptionsMenu();
         ((ScaleAdapter) getListFragment().getListAdapter()).notifyDataSetChanged();
         mode = -1;
