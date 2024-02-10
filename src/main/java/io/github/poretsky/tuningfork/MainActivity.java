@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.ListFragment;
 
@@ -33,6 +34,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         tone = new ToneGenerator();
         mode = 0;
         playingItem = -1;
+        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+                @Override
+                public void handleOnBackPressed() {
+                    tone.mute();
+                    finish();
+                }
+            });
         setContentView(R.layout.main_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Spinner spinner = (Spinner) findViewById(R.id.mode_spinner);
