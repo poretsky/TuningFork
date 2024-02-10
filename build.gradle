@@ -27,6 +27,10 @@ allprojects {
 
 apply plugin: 'com.android.application'
 
+// Load local.properties file for the sake of signing secrets stored there.
+Properties properties = new Properties()
+properties.load(project.file('local.properties').newDataInputStream())
+
 android {
     compileSdkVersion 34
     namespace 'io.github.poretsky.tuningfork'
@@ -37,6 +41,29 @@ android {
         targetSdkVersion 34
         versionCode 1
         versionName "1.0"
+    }
+
+    signingConfigs {
+        release {
+            // The actual data are taken from the local.properties file.
+            keyAlias properties.getProperty('key.alias')
+            keyPassword properties.getProperty('key.alias.password')
+            storeFile file(properties.getProperty('key.store'))
+            storePassword properties.getProperty('key.store.password')
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+            signingConfig signingConfigs.release
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = outputFileName.replace("release", defaultConfig.versionName)
+                }
+            }
+        }
     }
 
     compileOptions {
