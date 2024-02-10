@@ -39,8 +39,8 @@ android {
         applicationId "io.github.poretsky.tuningfork"
         minSdkVersion 23
         targetSdkVersion 34
-        versionCode 1
-        versionName "1.0"
+        versionCode 100
+        versionName "1.0.0"
     }
 
     signingConfigs {
