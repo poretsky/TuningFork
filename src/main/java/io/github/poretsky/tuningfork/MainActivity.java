@@ -19,14 +19,20 @@ import androidx.fragment.app.ListFragment;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    private static final String PLAYING_ITEM = "tuning_fork_playing_item";
+    private static final String SCALE_MODE = "tuning_fork_scale_mode";
+
+    private int mode;
+    private int playingItem;
+
     ToneGenerator tone;
-    int mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         tone = new ToneGenerator();
         mode = 0;
+        playingItem = -1;
         setContentView(R.layout.main_activity);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Spinner spinner = (Spinner) findViewById(R.id.mode_spinner);
@@ -34,23 +40,41 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
         spinner.setOnItemSelectedListener(this);
+        if (savedInstanceState != null) {
+            playingItem = savedInstanceState.getInt(PLAYING_ITEM, -1);
+            mode = savedInstanceState.getInt(SCALE_MODE);
+        } else if (getIntent().hasExtra(WidgetProvider.TONE)) {
+            playingItem = getIntent().getIntExtra(WidgetProvider.TONE, 2);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (tone.isPlaying()) {
+            ScaleAdapter scaleAdapter = (ScaleAdapter) getListFragment().getListAdapter();
+            outState.putInt(PLAYING_ITEM, scaleAdapter.getCurrentItem());
+        }
+        outState.putInt(SCALE_MODE, mode);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        redisplay(0);
-        if (getIntent().hasExtra(WidgetProvider.TONE)) {
-            int n = getIntent().getIntExtra(WidgetProvider.TONE, 2);
+        redisplay(mode);
+        if (playingItem >= 0) {
             ScaleAdapter scaleAdapter = (ScaleAdapter) getListFragment().getListAdapter();
-            scaleAdapter.onItemClick(null, null, (n < scaleAdapter.getCount()) ? n : 0, 0);
+            int n = (playingItem < scaleAdapter.getCount()) ?
+                playingItem :
+                0;
+            scaleAdapter.onItemClick(null, null, n, 0);
         }
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        tone.mute();
+    protected void onDestroy() {
+        super.onDestroy();
+        tone.stop();
     }
 
     @Override

@@ -31,6 +31,10 @@ class ScaleAdapter extends ArrayAdapter<String> implements AdapterView.OnItemCli
         currentItem = -1;
     }
 
+    int getCurrentItem() {
+        return currentItem;
+    }
+
     protected void decorateItemView(TextView textView, int position, boolean active) {
         if (active) {
             textView.setTextColor(ContextCompat.getColor(getContext(), android.R.color.holo_green_dark));
