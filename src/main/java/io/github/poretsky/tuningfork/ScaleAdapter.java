@@ -39,6 +39,8 @@ class ScaleAdapter extends ArrayAdapter<String> implements AdapterView.OnItemCli
         if (active) {
             textView.setTextColor(ContextCompat.getColor(getContext(), android.R.color.holo_green_dark));
             textView.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_music_note_black, 0);
+        } else {
+            textView.setTextColor(ContextCompat.getColor(getContext(), android.R.color.black));
         }
     }
 
@@ -52,6 +54,8 @@ class ScaleAdapter extends ArrayAdapter<String> implements AdapterView.OnItemCli
         if (active) {
             desc.append(' ')
                 .append(getContext().getString(R.string.sounding));
+        } else {
+            textView.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
         }
         textView.setContentDescription(desc.toString());
         decorateItemView(textView, position, active);
