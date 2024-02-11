@@ -69,6 +69,7 @@ class ToneGenerator {
 
     void stop() {
         if (playing >= 0) {
+            player.setVolume(0);
             playing = -1;
             player.pause();
             player.flush();
