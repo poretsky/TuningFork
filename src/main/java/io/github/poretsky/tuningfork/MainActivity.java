@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     ToneGenerator tone;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,10 +60,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (tone.isPlaying()) {
-            ScaleAdapter scaleAdapter = (ScaleAdapter) getListFragment().getListAdapter();
-            outState.putInt(PLAYING_ITEM, scaleAdapter.getCurrentItem());
-        }
+        ScaleAdapter scaleAdapter = (ScaleAdapter) getListFragment().getListAdapter();
+        playingItem = scaleAdapter.getCurrentItem();
+        outState.putInt(PLAYING_ITEM, playingItem);
         outState.putInt(SCALE_MODE, mode);
     }
 
@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
+        super.onStop();
         tone.stop();
     }
 

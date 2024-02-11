@@ -63,6 +63,14 @@ class ScaleAdapter extends ArrayAdapter<String> implements AdapterView.OnItemCli
     }
 
     @Override
+    public void notifyDataSetChanged() {
+        if (!host.tone.isPlaying())
+            currentItem = -1;
+        super.notifyDataSetChanged();
+    }
+
+
+    @Override
     public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
         if (host.tone.isPlaying() && (position == currentItem)) {
             host.tone.mute();
