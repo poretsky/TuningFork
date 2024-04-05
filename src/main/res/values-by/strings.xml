@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Камертон</string>
+  <string name="classic_guitar">Класічная гітара</string>
+  <string name="russian_guitar">Руская гітара</string>
+  <string name="chromatic_scale">Храматычная гама</string>
+  <string name="action_stop">Змоўкнуць</string>
+  <string name="C">До</string>
+  <string name="C_sharp">До дыез</string>
+  <string name="D">Рэ</string>
+  <string name="D_sharp">Рэ дыез</string>
+  <string name="E">Мі</string>
+  <string name="F">Фа</string>
+  <string name="F_sharp">Фа дыез</string>
+  <string name="G">Соль</string>
+  <string name="G_sharp">Соль дыез</string>
+  <string name="A">Ля</string>
+  <string name="B">Сі бемоль</string>
+  <string name="H">Сі</string>
+  <string name="first">Першая струна</string>
+  <string name="second">Другая струна</string>
+  <string name="third">Трэцяя струна</string>
+  <string name="fourth">Чацвёртая струна</string>
+  <string name="fifth">Пятая струна</string>
+  <string name="sixth">Шостая струна</string>
+  <string name="seventh">Сёмая струна</string>
+  <string name="sounding">Гучыць</string>
+</resources>
