@@ -40,6 +40,13 @@ android {
         versionName "1.0.2"
     }
 
+    dependenciesInfo {
+        // Disables dependency metadata when building APKs.
+        includeInApk = false
+        // Disables dependency metadata when building Android App Bundles.
+        includeInBundle = false
+    }
+
     signingConfigs {
         release {
             // The actual data are taken from the local.properties file.
