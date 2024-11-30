@@ -1,0 +1,6 @@
+This simple application is intended first of all for those musicians
+who like to tune their instruments relying mainly on ears rather than
+using various modern tuners with visual indication, or for all who
+needs a reference musical tone for any reason. It produces an audible
+reference tone by demand just like a classic tuning fork, and, being
+installed on a smartphone, is always ready to use.

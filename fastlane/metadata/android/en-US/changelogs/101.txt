@@ -1,0 +1,3 @@
+* Back button behaviour fix on modern Android versions
+* Drop volume before stopping
+* Stop and resume when going to shadow and back
