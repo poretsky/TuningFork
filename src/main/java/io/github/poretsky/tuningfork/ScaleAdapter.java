@@ -6,6 +6,7 @@
 
 package io.github.poretsky.tuningfork;
 
+import android.content.res.Configuration;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,6 +21,8 @@ class ScaleAdapter extends ArrayAdapter<String> implements AdapterView.OnItemCli
     private final double[] notes;
     private final int[] descriptionResIds;
 
+    private final boolean isNightMode;
+
     private int currentItem;
 
 
@@ -28,6 +31,7 @@ class ScaleAdapter extends ArrayAdapter<String> implements AdapterView.OnItemCli
         host = activity;
         notes = freqs;
         descriptionResIds = descResIds;
+        isNightMode = (host.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
         currentItem = -1;
     }
 
@@ -37,10 +41,10 @@ class ScaleAdapter extends ArrayAdapter<String> implements AdapterView.OnItemCli
 
     protected void decorateItemView(TextView textView, int position, boolean active) {
         if (active) {
-            textView.setTextColor(ContextCompat.getColor(getContext(), android.R.color.holo_green_dark));
-            textView.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_music_note_black, 0);
+            textView.setTextColor(ContextCompat.getColor(host, android.R.color.holo_green_dark));
+            textView.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, isNightMode ? R.drawable.ic_music_note_white : R.drawable.ic_music_note_black, 0);
         } else {
-            textView.setTextColor(ContextCompat.getColor(getContext(), android.R.color.black));
+            textView.setTextColor(ContextCompat.getColor(host, isNightMode ? android.R.color.white : android.R.color.black));
         }
     }
 
