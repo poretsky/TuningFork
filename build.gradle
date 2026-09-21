@@ -29,13 +29,13 @@ Properties properties = new Properties()
 properties.load(project.file('local.properties').newDataInputStream())
 
 android {
-    compileSdkVersion 35
+    compileSdkVersion 36
     namespace 'io.github.poretsky.tuningfork'
 
     defaultConfig {
         applicationId "io.github.poretsky.tuningfork"
         minSdkVersion 23
-        targetSdkVersion 35
+        targetSdkVersion 36
         versionCode 103
         versionName "1.0.3"
     }
