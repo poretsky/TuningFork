@@ -1,0 +1,2 @@
+* Edge-to-edge display support
+* Dark theme support
